@@ -63,12 +63,6 @@ $filesystem->copy(__DIR__.'/filename.txt', __DIR__.'/filename2.txt' );
 $filesystem->move(__DIR__.'/filename.txt', __DIR__.'/destination/filename.txt' );
 ```
 
-###### To move a file 
-
-```php
-$filesystem->move(__DIR__.'/filename.txt', __DIR__.'/destination/filename.txt' );
-```
-
 ###### To get filesize
 
 ```php
