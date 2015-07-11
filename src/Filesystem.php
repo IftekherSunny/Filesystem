@@ -155,13 +155,13 @@ class Filesystem implements FilesystemInterface
      */
     public function files($directoryName)
     {
-        if (!$this->isDir($directoryName)) {
-            throw new FileNotFoundException('Directory not found in the path [ ' . $directoryName . ' ].');
+        $glob = glob($directoryName . '/*');
+
+        if ($glob === false) {
+            return [];
         }
 
-        $files = scandir($directoryName);
-
-        return array_filter($files, function ($file) {
+        return array_filter($glob, function ($file) {
             return filetype($file) == 'file';
         });
     }
