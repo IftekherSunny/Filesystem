@@ -1,7 +1,7 @@
 ## Filesystem
 
 [![Total Downloads](https://poser.pugx.org/sun/filesystem/downloads)](https://packagist.org/packages/sun/filesystem)
-[![Latest Stable Version](https://poser.pugx.org/sun/filesystem/v/stable)](https://packagist.org/packages/sun/filesystem) [![Latest Unstable Version](https://poser.pugx.org/sun/filesystem/v/unstable)](https://packagist.org/packages/sun/filesystem) [![License](https://poser.pugx.org/sun/filesystem/license)](https://packagist.org/packages/sun/filesystem)
+[![Latest Stable Version](https://poser.pugx.org/sun/filesystem/v/stable)](https://packagist.org/packages/sun/filesystem)  [![Latest Unstable Version](https://poser.pugx.org/sun/filesystem/v/unstable)](https://packagist.org/packages/sun/filesystem) [![License](https://poser.pugx.org/sun/filesystem/license)](https://packagist.org/packages/sun/filesystem)
 
 Filesystem helps you to manage your file easily.
 
@@ -36,7 +36,7 @@ $filesystem->delete(__DIR__.'/filename.txt');
 ###### To update file
 
 ```php
-$filesystem->update(__DIR__.'/filename.txt', 'content');
+$filesystem->update(__DIR__.'/filename.txt', ' more content');
 ```
 
 ###### To get file content
@@ -55,12 +55,6 @@ $filesystem->append(__DIR__.'/filename.txt', 'more content');
 
 ```php
 $filesystem->copy(__DIR__.'/filename.txt', __DIR__.'/filename2.txt' );
-```
-
-###### To move a file 
-
-```php
-$filesystem->move(__DIR__.'/filename.txt', __DIR__.'/destination/filename.txt' );
 ```
 
 ###### To move a file 
