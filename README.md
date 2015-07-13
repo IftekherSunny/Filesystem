@@ -16,7 +16,7 @@ Just copy Filesystem folder somewhere into your project directory. Then include 
 Filesystem is also available via Composer/Packagist.
 
 ```
- composer require sun\filesystem
+ composer require sun/filesystem
 ```
 
 ## All Methods
