@@ -1,11 +1,13 @@
 {
     "name": "sun/filesystem",
     "description": "This package helps you to manage your file easily.",
+    "keywords": ["filesystem", "php filesystem", "fast filesystem", "file create"],
     "license": "MIT",
     "authors": [
         {
             "name": "Iftekher Sunny",
-            "email": "iftekhersunny@hotmail.com"
+            "email": "iftekhersunny@hotmail.com",
+            "homepage": "http://iftekhersunny.com",
         }
     ],
     "require": {
