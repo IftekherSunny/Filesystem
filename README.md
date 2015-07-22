@@ -1,5 +1,6 @@
 ## Filesystem
 
+[![Build Status](https://travis-ci.org/IftekherSunny/Filesystem.svg?branch=master)](https://travis-ci.org/IftekherSunny/Filesystem)
 [![Total Downloads](https://poser.pugx.org/sun/filesystem/downloads)](https://packagist.org/packages/sun/filesystem)
 [![Latest Stable Version](https://poser.pugx.org/sun/filesystem/v/stable)](https://packagist.org/packages/sun/filesystem)  [![Latest Unstable Version](https://poser.pugx.org/sun/filesystem/v/unstable)](https://packagist.org/packages/sun/filesystem) [![License](https://poser.pugx.org/sun/filesystem/license)](https://packagist.org/packages/sun/filesystem)
 
