@@ -28,7 +28,7 @@ class Filesystem implements FilesystemInterface
     public function delete($filename)
     {
         if ($this->exists($filename) && $this->isFile($filename)) {
-            return unlink($filename);
+            return @unlink($filename);
         }
 
         throw new FileNotFoundException('File not found in the path [ ' . $filename . ' ].');
@@ -179,14 +179,8 @@ class Filesystem implements FilesystemInterface
         if (!$this->isDir($directoryName)) {
             throw new FileNotFoundException('Directory not found in the path [ ' . $directoryName . ' ].');
         }
-        $directories = scandir($directoryName);
 
-        array_shift($directories);
-        array_shift($directories);
-
-        return array_filter($directories, function ($directory) {
-            return filetype($directory) == 'dir';
-        });
+        return array_filter(glob($directoryName . '/*'), 'is_dir');
     }
 
     /**
@@ -211,42 +205,40 @@ class Filesystem implements FilesystemInterface
      */
     public function deleteDirectory($directoryName)
     {
-        if (!$this->isDir($directoryName)) {
-            throw new FileNotFoundException('Directory not found in the path [ ' . $directoryName . ' ].');
-        }
-
-        $files = scandir($directoryName);
-        array_shift($files);
-        array_shift($files);
-
-        foreach ($files as $value) {
-            $this->delete($directoryName . '/' . $value);
-        }
-
-        return rmdir($directoryName);
-
+        return ! $this->cleanDirectory($directoryName, true);
     }
 
     /**
      * To clean a directory
      *
-     * @param $directoryName
+     * @param      $directoryName
      *
-     * @throws FileNotFoundException
+     * @param bool $deleteRootDirectory
+     *
+     * @return bool
      */
-    public function cleanDirectory($directoryName)
+    public function cleanDirectory($directoryName, $deleteRootDirectory = false)
     {
-        if (!$this->isDir($directoryName)) {
-            throw new FileNotFoundException('Directory not found in the path [ ' . $directoryName . ' ].');
+        if(is_dir($directoryName)){
+            $files = glob( $directoryName . '/*', GLOB_NOSORT );
+
+            foreach( $files as $file )
+            {
+                $this->cleanDirectory( $file, true );
+            }
+
+            if(file_exists($directoryName) && ($deleteRootDirectory == true)) {
+                @rmdir( $directoryName );
+            }
+        } elseif(is_file($directoryName)) {
+            @unlink( $directoryName );
         }
 
-        $files = scandir($directoryName);
-        array_shift($files);
-        array_shift($files);
-
-        foreach ($files as $value) {
-            $this->delete($directoryName . '/' . $value);
+        if(file_exists($directoryName)) {
+            return true;
         }
+
+        return false;
     }
 
     /**
