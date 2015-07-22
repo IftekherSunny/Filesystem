@@ -32,7 +32,7 @@ class FilesystemSpec extends ObjectBehavior
         $this->delete($this->root->url() . '/file.txt');
     }
 
-    public function it_throws_file_not_found_exception_if_the_file_does_not_exists_which_you_want_to_delete()
+    public function it_throws_file_not_found_exception_if_the_file_does_not_exists()
     {
         $this->shouldThrow('Sun\FileNotFoundException')->duringDelete('foo.txt');
     }
@@ -64,12 +64,12 @@ class FilesystemSpec extends ObjectBehavior
         $this->get($this->root->url() . '/file.txt')->shouldReturn('content');
     }
 
-    public function it_throws_file_not_found_exception_when_the_file_does_not_exists()
+    public function it_throws_file_not_found_exception_if_the_file_does_not_exists_when_you_try_get_file_content()
     {
         $this->shouldThrow('Sun\FileNotFoundException')->duringGet('foo.txt');
     }
 
-    public function it_appends_more_content_to_existing_file()
+    public function it_appends_more_content_with_existing_file()
     {
         $this->append($this->root->url() . '/file.txt', ' more content');
 
@@ -170,4 +170,3 @@ class FilesystemSpec extends ObjectBehavior
     }
 
 }
-
