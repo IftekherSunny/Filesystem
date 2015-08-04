@@ -11,6 +11,6 @@ class FilesystemAlien extends Alien
      */
     public static function registerAlien()
     {
-        return new Filesystem();
+        return 'Sun\Filesystem';
     }
 }
