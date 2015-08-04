@@ -7,7 +7,7 @@ class FilesystemAlien extends Alien
     /**
      * To register Alien
      *
-     * @return object
+     * @return namespace
      */
     public static function registerAlien()
     {
