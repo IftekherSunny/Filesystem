@@ -2,6 +2,9 @@
 
 namespace Sun;
 
+use RecursiveIteratorIterator;
+use RecursiveDirectoryIterator;
+
 class Filesystem implements FilesystemInterface
 {
     /**
@@ -155,15 +158,17 @@ class Filesystem implements FilesystemInterface
      */
     public function files($directoryName)
     {
-        $glob = glob($directoryName . '/*');
-
-        if ($glob === false) {
-            return [];
+        if (!$this->isDir($directoryName)) {
+            throw new FileNotFoundException('Directory not found in the path [ ' . $directoryName . ' ].');
         }
 
-        return array_filter($glob, function ($file) {
-            return filetype($file) == 'file';
-        });
+        $files = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($directoryName,
+                RecursiveDirectoryIterator::SKIP_DOTS
+            )
+        );
+
+        return array_filter(iterator_to_array($files), 'is_file');
     }
 
     /**
@@ -180,7 +185,24 @@ class Filesystem implements FilesystemInterface
             throw new FileNotFoundException('Directory not found in the path [ ' . $directoryName . ' ].');
         }
 
-        return array_filter(glob($directoryName . '/*'), 'is_dir');
+        $iterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($directoryName,
+                RecursiveDirectoryIterator::CURRENT_AS_FILEINFO)
+        );
+
+        $directories = [];
+
+        foreach($iterator as $file) {
+            if($file->isDir()) {
+                if( !(substr($file,-2) === '..')) {
+                    $directories[] = trim($file,'.');
+                }
+            }
+        }
+
+        array_shift($directories);
+
+        return $directories;
     }
 
     /**

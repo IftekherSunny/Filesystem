@@ -118,10 +118,14 @@ class FilesystemSpec extends ObjectBehavior
         $dir = __DIR__ . '/newDir';
         mkdir($dir, 777, true);
 
+        // create sub directory
+        $subDir = __DIR__ . '/newDir/dir';
+        mkdir($subDir, 777, true);
+
         // create files
         $this->create($dir . '/file1.txt', 'content');
         $this->create($dir . '/file2.txt', 'content');
-        $this->create($dir . '/file3.txt', 'content');
+        $this->create($subDir . '/file3.txt', 'content');
 
         // check it returns 3 ( total number of created files )
         $this->files($dir)->shouldHaveCount(3);
@@ -141,9 +145,10 @@ class FilesystemSpec extends ObjectBehavior
         $this->createDirectory($dir . '/dir1');
         $this->createDirectory($dir . '/dir2');
         $this->createDirectory($dir . '/dir3');
+        $this->createDirectory($dir . '/dir3/dir1');
 
-        // check it returns 3 ( total number of created directories )
-        $this->directories($dir)->shouldHaveCount(3);
+        // check it returns 4 ( total number of created directories )
+        $this->directories($dir)->shouldHaveCount(4);
 
         // delete directory that i have created
         $this->deleteDirectory($dir);
